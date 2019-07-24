@@ -4,18 +4,29 @@ import axios from 'axios';
 function App() {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  axios.get('https://cors-anywhere.herokuapp.com/https://quotesondesign.com/wp-json/posts')
+  /*  axios.get('https://api.kanye.rest')
     .then((response) => {
-      setQuote(response.data[0].content.replace(/<\/p>/, '').replace(/<p>/, ''));
-      setAuthor(response.data[0].title);
+      setQuote(response.data.quote);
     });
-
+   */
+  const handleClick = () => {
+     //event.preventDefault();
+    console.log('yeet');
+    axios.get('https://api.kanye.rest')
+      .then((response) => {
+        console.log(response.data.quote);
+        setQuote(response.data.quote);
+      });
+  };
 
   return (
     <div className="App">
       <h1>Random Quote Generator</h1>
       {quote}
-      {author}
+      <button onClick={handleClick}>Test</button>
+{/*       <form onSubmit={handleClick}>
+        <input type="submit" />
+      </form> */}
     </div>
   );
 }
