@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+  axios.get('https://cors-anywhere.herokuapp.com/https://quotesondesign.com/wp-json/posts')
+    .then((response) => {
+      setQuote(response.data[0].content.replace(/<\/p>/, '').replace(/<p>/, ''));
+      setAuthor(response.data[0].title);
+    });
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Random Quote Generator</h1>
+      {quote}
+      {author}
     </div>
   );
 }
