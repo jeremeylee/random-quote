@@ -9,8 +9,8 @@ function App() {
       setQuote(response.data.quote);
     });
    */
-  const handleClick = () => {
-     //event.preventDefault();
+  const handleClick = (event) => {
+    event.preventDefault();
     console.log('yeet');
     axios.get('https://api.kanye.rest')
       .then((response) => {
@@ -23,10 +23,9 @@ function App() {
     <div className="App">
       <h1>Random Quote Generator</h1>
       {quote}
-      <button onClick={handleClick}>Test</button>
-{/*       <form onSubmit={handleClick}>
+      <form onSubmit={handleClick}>
         <input type="submit" />
-      </form> */}
+      </form>
     </div>
   );
 }
