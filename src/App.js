@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import quoteService from './services/quote';
 
 function App() {
   const [quote, setQuote] = useState('');
@@ -9,14 +10,18 @@ function App() {
       setQuote(response.data.quote);
     });
    */
-  const handleClick = (event) => {
+  const randomQuote = async () => {
+    const response = await quoteService.getQuote();
+    setQuote(response.quote);
+  };
+
+  useEffect(() => {
+    randomQuote();
+  }, []);
+
+  const handleClick = async (event) => {
     event.preventDefault();
-    console.log('yeet');
-    axios.get('https://api.kanye.rest')
-      .then((response) => {
-        console.log(response.data.quote);
-        setQuote(response.data.quote);
-      });
+    randomQuote();
   };
 
   return (
